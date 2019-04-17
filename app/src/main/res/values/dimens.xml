@@ -1,0 +1,16 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="current_city_textsize">36sp</dimen>
+    <dimen name="current_degree_textsize">96sp</dimen>
+    <dimen name="spacer_btw_err_and_retry_btn">44dp</dimen>
+    <dimen name="err_msg_text_size">54sp</dimen>
+    <dimen name="progress_circle_size">96dp</dimen>
+
+    <dimen name="top_margin_height_28dp">28dp</dimen>
+    <dimen name="top_margin_height_56dp">56dp</dimen>
+    <dimen name="forecast_weather_top_margin">16dp</dimen>
+    <dimen name="recycleview_padding_size">16dp</dimen>
+    <dimen name="recycleview_item_height">80dp</dimen>
+    <dimen name="forecast_weather_item_textsize">16sp</dimen>
+    <dimen name="activity_margin_size">16dp</dimen>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RobotoTextView">
+        <attr name="font_name">
+            <enum name="ROBOTO_BLACK" value="0"/>
+            <enum name="ROBOTO_BOLD" value="1"/>
+            <enum name="ROBOTO_THIN" value="2"/>
+            <enum name="ROBOTO_REGULAR" value="3"/>
+            <enum name="ROBOTO_ITALIC" value="4"/>
+        </attr>
+    </declare-styleable>
+</resources>
