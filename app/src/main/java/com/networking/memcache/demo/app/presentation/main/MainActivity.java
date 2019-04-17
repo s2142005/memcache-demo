@@ -1,9 +1,11 @@
 package com.networking.memcache.demo.app.presentation.main;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.networking.memcache.demo.R;
+import com.networking.memcache.demo.app.DemoApplication;
 import com.networking.memcache.demo.app.presentation.BaseActivity;
 import com.networking.memcache.demo.app.presentation.adapter.RecyclerViewAdapter;
 import com.networking.memcache.demo.app.widget.LoadingSpinner;
@@ -14,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -29,6 +32,8 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.fab) LoadingSpinner fabButton;
     @BindView(R.id.main_content) ConstraintLayout mainContentView;
+    @BindView(R.id.swipe_container)
+    SwipeRefreshLayout swipeLayout;
 
     private RecyclerViewAdapter adapter;
     private MainViewModel mainViewModel;
@@ -51,6 +56,24 @@ public class MainActivity extends BaseActivity {
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         observeUserListChangedEvent();
         initScrollListener();
+
+        setupPullToRefreshEvent();
+    }
+
+    private void setupPullToRefreshEvent() {
+        swipeLayout.setOnRefreshListener(() -> {
+            DemoApplication.getInstance().getDataRepo().cleanUp();
+            pageOffset = 0;
+            loadMore();
+        });
+
+        // Scheme colors for animation
+        swipeLayout.setColorSchemeColors(
+                getResources().getColor(android.R.color.holo_blue_bright),
+                getResources().getColor(android.R.color.holo_green_light),
+                getResources().getColor(android.R.color.holo_orange_light),
+                getResources().getColor(android.R.color.holo_red_light)
+        );
     }
 
     public void showProgressCircle() {
@@ -58,6 +81,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void hideProgressCircle() {
+        swipeLayout.setRefreshing(false);
         fabButton.setVisibility(View.GONE);
     }
 
