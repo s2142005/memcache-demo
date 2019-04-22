@@ -1,1 +1,3 @@
 gradle/wrapper
+/.gradle/
+*.DS_Store
