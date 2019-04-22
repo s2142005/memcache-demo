@@ -1,5 +1,7 @@
 package com.networking.memcache.demo.domain.model;
 
+import com.networking.memcache.demo.data.response.unsplash.ResultsItem;
+
 import java.util.List;
 
 public class UnsplashUser {
@@ -12,6 +14,15 @@ public class UnsplashUser {
     private String id;
     private String firstName;
     private String username;
+
+    public UnsplashUser(ResultsItem item) {
+        this.firstName = item.getFirstName();
+        this.lastName = item.getLastName();
+        this.name = item.getName();
+        this.username = item.getUsername();
+        this.id = item.getId();
+        this.totalLikes = item.getTotalLikes();
+    }
 
     public String getLastName() {
         return lastName;

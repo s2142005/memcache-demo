@@ -52,9 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Observable.just(endpoint.loadImageAsBytes(user.getProfileImage().getLarge()))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(bytes -> {
-                    Glide.with(context).load(bytes).into(holder.imvProfile);
-                });
+                .subscribe(bytes -> Glide.with(context).load(bytes).into(holder.imvProfile));
 
         final ArrayList<String> images = new ArrayList<>();
         for (Photo photo : user.getPhotos()) {

@@ -6,6 +6,12 @@ public class ProfileImage {
     private String large;
     private String medium;
 
+    public ProfileImage(String small, String medium, String large) {
+        this.small = small;
+        this.medium = medium;
+        this.large = large;
+    }
+
     public String getSmall() {
         return small;
     }
