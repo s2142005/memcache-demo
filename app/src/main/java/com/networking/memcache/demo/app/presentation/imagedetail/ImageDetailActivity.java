@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.DrawableRes;
+import androidx.appcompat.app.ActionBar;
 import androidx.viewpager.widget.ViewPager;
+import butterknife.BindView;
 
 public class ImageDetailActivity extends BaseActivity {
 
@@ -28,8 +30,12 @@ public class ImageDetailActivity extends BaseActivity {
     private static final String HOLDER = "HOLDER";
     private static final String ALLOW_ZOOM = "ALLOW_ZOOM";
 
-    private ViewPager picsViewPager;
-    private LinearLayout point;
+    @BindView(R.id.picsViewPager)
+    ViewPager picsViewPager;
+
+    @BindView(R.id.point)
+    LinearLayout point;
+
     private int size;
 
     public static Intent startIntent(
@@ -66,8 +72,11 @@ public class ImageDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        final ActionBar supportActionBar = getSupportActionBar();
+        if(supportActionBar != null) {
+            supportActionBar.setHomeButtonEnabled(true);
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         Intent intent = getIntent();
         List<String> pics = intent.getStringArrayListExtra(PICS);
@@ -78,8 +87,6 @@ public class ImageDetailActivity extends BaseActivity {
         GalleryAdapter galleryAdapter = new GalleryAdapter(pics, picsRes, holder);
         size = pics.size();
 
-        point = findViewById(R.id.point);
-        picsViewPager = findViewById(R.id.picsViewPager);
         picsViewPager.setAdapter(galleryAdapter);
 
         picsViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
